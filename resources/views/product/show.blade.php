@@ -52,6 +52,28 @@
                             <td>{{ $product->created_at }}</td>
                         </tr>
                     </table>
+                    <hr/>
+                    <h4 class="text-center">Price Monitor</h4>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Updated At</th>
+                            <th>Price</th>
+                        </tr>
+@if (sizeof($prices) === 0)
+                        <tr>
+                            <td colspan="3">
+                                No Data, Wait for 1 hour or run <code>php artisan price:monitor</code>
+                            </td>
+                        </tr>
+@endif
+@foreach ($prices as $key => $val)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $val->created_at }}</td>
+                            <td>IDR {{ number_format($val->price) }}</td>
+                        </tr>
+@endforeach
                 </div>
             </div>
         </div>

@@ -66,7 +66,7 @@ __11. Running Cron__
 To Running cron, set your cron with this command
 
 ```console
-* * * * * php <your_app_path> price:monitor >> /dev/null 2>&1
+* * * * * php <your_app_path>/artisan price:monitor >> /dev/null 2>&1
 ```
 
 

@@ -14,7 +14,10 @@ class ProductController extends Controller
     private $productRepo;
     private $monitorRepo;
 
-    public function __construct(ProductRepositoryInterface $productRepo, MonitorRepositoryInterface $monitorRepo)
+    public function __construct(
+        ProductRepositoryInterface $productRepo,
+        MonitorRepositoryInterface $monitorRepo
+    )
     {
         $this->productRepo = $productRepo;
         $this->monitorRepo = $monitorRepo;
@@ -67,8 +70,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productRepo->getById($id);
-        $images = json_decode($product->image);
-        return view('product.show', compact('product', 'images'));
+        $args = [
+            'product' => $product,
+            'images' => json_decode($product->image),
+            'prices' => $this->monitorRepo->getByProductId($id)
+        ];
+        return view('product.show', $args);
     }
 
 }
