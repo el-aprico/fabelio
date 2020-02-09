@@ -43,6 +43,20 @@ class ProductController extends Controller
         $product = $this->productRepo;
         return view('product.create', compact('product', 'date'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\ProductRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ProductRequest $request)
+    {
+        $this->productRepo->create($request->toArray());
+        return redirect()->route('product.index')
+            ->with('success', 'Product Created Successfully');
+    }
+
     /**
      * Display the specified resource.
      *
